@@ -1,0 +1,78 @@
+name: creditgraph CI/CD (Azure backup)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  Containerize-job:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'no-deploy') == false
+    outputs:
+      repo_owner_lower: ${{ steps.lowercase.outputs.repo_owner_lower }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Convert repository owner to lowercase
+        id: lowercase
+        run: |
+          echo "repo_owner_lower=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+      
+      - name: Setup docker build
+        uses: docker/setup-buildx-action@v3 
+
+      # --- BUILD BACKEND ---
+      - name: Build and push Backend
+        if: contains(github.event.head_commit.message, 'frontend-deploy') == false
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ steps.lowercase.outputs.repo_owner_lower }}/creditgraph-be:v1-${{ github.sha }}
+
+      # --- BUILD FRONTEND ---
+      - name: Build and push Frontend
+        if: contains(github.event.head_commit.message, 'backend-deploy') == false
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ steps.lowercase.outputs.repo_owner_lower }}/creditgraph-fe:v1-${{ github.sha }}
+          
+  Deploy-job:
+    needs: 
+      - Containerize-job
+    runs-on: ubuntu-latest
+    if: false
+    steps:
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CRED }}
+
+      # --- DEPLOY BACKEND STEP ---
+      - name: Deploy Backend to Web App
+        if: contains(github.event.head_commit.message, 'frontend-deploy') == false
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'creditgraph-be' 
+          images: 'ghcr.io/${{ needs.Containerize-job.outputs.repo_owner_lower }}/creditgraph-be:v1-${{ github.sha }}' 
+
+      # --- DEPLOY FRONTEND STEP ---
+      - name: Deploy Frontend to Web App
+        if: contains(github.event.head_commit.message, 'backend-deploy') == false
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'creditgraph'
+          images: 'ghcr.io/${{ needs.Containerize-job.outputs.repo_owner_lower }}/creditgraph-fe:v1-${{ github.sha }}'
