@@ -1,0 +1,202 @@
+.loadingContainer {
+  padding-top: 40px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.walletBadge {
+  font-size: 14px;
+  color: var(--text-muted);
+  background: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.creditCard {
+  background: var(--text-main);
+  color: white;
+}
+
+.cardSubtitle {
+  color: #aaa;
+  margin-bottom: 0;
+}
+
+.cardValue {
+  color: white;
+}
+
+.cardDivider {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+}
+
+.smallLabel {
+  color: #aaa;
+  font-size: 12px;
+  margin: 0;
+}
+
+.boldValue {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.tierValue {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.sectionTitle {
+  margin-top: 32px;
+  font-size: 18px;
+}
+
+.loanAmount {
+  font-weight: bold;
+}
+
+.loanStateLate {
+  font-size: 12px;
+  color: red;
+}
+
+.loanStateActive {
+  font-size: 12px;
+  color: var(--primary);
+}
+
+.actionButton {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.attestCard {
+  padding: 12px 16px;
+}
+
+.attestText {
+  font-size: 14px;
+}
+
+.attestAmount {
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.modalText {
+  margin-bottom: 4px;
+}
+
+.modalNote {
+  font-size: 12px;
+  color: var(--primary);
+}
+
+.modalActions {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.networkTitle {
+  font-size: 22px;
+}
+
+.vouchBtnWrapper {
+  margin-bottom: 24px;
+}
+
+.aboutList {
+  font-size: 14px;
+  padding-left: 20px;
+  color: var(--text-muted);
+}
+
+.aboutListItem {
+  margin-bottom: 8px;
+}
+
+
+.viewAllBtn {
+  width: 100%;
+  padding: 12px;
+  background: none;
+  border: 1px dashed var(--border-color);
+  color: var(--primary);
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.viewAllBtn:hover {
+  background: var(--surface-color);
+}
+
+/* History Segmented Toggle */
+.toggleContainer {
+  display: flex;
+  background: var(--surface-color);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-color);
+}
+
+.toggleBtn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleBtnActive {
+  background: var(--bg-color);
+  color: var(--primary);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Profile Tab */
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 0;
+}
+
+.avatar {
+  font-size: 64px;
+  background: var(--surface-color);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  margin-bottom: 16px;
+}
+
+.profileAddress {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}

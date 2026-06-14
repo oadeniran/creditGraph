@@ -1,0 +1,60 @@
+# --- Global / System Files ---
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+*.swp
+
+# --- Credentials & Secrets ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+credentials/
+secrets/
+*.pem
+*.key
+google-credentials.json
+
+# --- Python / Backend ---
+__pycache__/
+*.py[cod]
+*$py.class
+# Virtual Environments
+venv/
+.venv/
+env/
+.env/
+# Distribution / Build
+dist/
+build/
+*.egg-info/
+.eggs/
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Node / Frontend ---
+node_modules/
+# Next.js build output
+.next/
+out/
+# Production build
+build/
+dist/
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+android/
+
+# --- Testing / Misc ---
+cypress/videos
+cypress/screenshots
+coverage/
+tmp/
+temp/
