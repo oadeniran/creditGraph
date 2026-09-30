@@ -2,9 +2,9 @@ name: creditgraph CI/CD (Azure backup)
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   Containerize-job:
@@ -54,7 +54,6 @@ jobs:
     needs: 
       - Containerize-job
     runs-on: ubuntu-latest
-    if: false
     steps:
       - name: Log in to Azure
         uses: azure/login@v1
